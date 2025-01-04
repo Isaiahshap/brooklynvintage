@@ -2,9 +2,12 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import ProductsDropdown from './ProductsDropdown';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +16,12 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const menuItems = [
+    { name: 'Products', hasDropdown: true },
+    { name: 'About', href: '/about' },
+    { name: 'Blog', href: '/blog' },
+  ];
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-700 ${
@@ -33,6 +42,50 @@ export default function Navbar() {
               </span>
             </div>
           </Link>
+
+          {scrolled && (
+            <div className="flex items-center space-x-12">
+              {menuItems.map((item) => (
+                <div
+                  key={item.name}
+                  className="relative group"
+                  onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  {item.hasDropdown ? (
+                    <button className="text-sm tracking-[0.3em] text-vintage-copper/80 hover:text-vintage-gold transition-colors duration-300">
+                      {item.name.toUpperCase()}
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href || ''}
+                      className="text-sm tracking-[0.3em] text-vintage-copper/80 hover:text-vintage-gold transition-colors duration-300"
+                    >
+                      {item.name.toUpperCase()}
+                    </Link>
+                  )}
+                  
+                  <motion.div
+                    className="absolute -inset-x-6 -inset-y-4 border border-vintage-copper/10 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700"
+                  />
+                  
+                  {item.hasDropdown && (
+                    <ProductsDropdown isOpen={activeDropdown === item.name} />
+                  )}
+                </div>
+              ))}
+              
+              <Link
+                href="/cart"
+                className="relative group"
+              >
+                <div className="absolute -inset-x-6 -inset-y-4 border border-vintage-copper/10 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700" />
+                <span className="text-sm tracking-[0.3em] text-vintage-copper/80 hover:text-vintage-gold transition-colors duration-300">
+                  CART (0)
+                </span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>
