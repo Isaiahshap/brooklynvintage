@@ -24,9 +24,14 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-32">
           <Link href="/" className="group relative">
             <div className="absolute -inset-x-6 -inset-y-4 border border-vintage-copper/10 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-700" />
-            <span className="block text-3xl font-cinzel tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-vintage-gold via-vintage-copper to-vintage-gold">
-              BROOKLYN
-            </span>
+            <div className="flex flex-col items-center">
+              <span className="block text-2xl font-cinzel tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-vintage-gold via-vintage-copper to-vintage-gold">
+                BROOKLYN
+              </span>
+              <span className="text-sm font-tenor tracking-[0.5em] text-vintage-copper/80 mt-1">
+                VINTAGE COMPANY
+              </span>
+            </div>
           </Link>
         </div>
       </div>

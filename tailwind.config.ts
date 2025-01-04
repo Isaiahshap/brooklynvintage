@@ -31,7 +31,21 @@ export default {
         'luxury-gradient': 'linear-gradient(45deg, var(--tw-gradient-stops))',
         'shimmer-gradient': 'linear-gradient(90deg, transparent 0%, rgba(200, 121, 65, 0.1) 50%, transparent 100%)',
         'art-nouveau': "url('/patterns/art-nouveau.png')",
-        'vintage-texture': "url('/patterns/vintage-texture.png')"
+        'vintage-texture': "url('/patterns/vintage-texture.png')",
+        'art-deco-pattern': `repeating-linear-gradient(
+          45deg,
+          var(--vintage-gold) 0px,
+          var(--vintage-gold) 1px,
+          transparent 1px,
+          transparent 10px
+        )`,
+        'chevron-pattern': `repeating-linear-gradient(
+          -45deg,
+          var(--vintage-copper) 0px,
+          var(--vintage-copper) 1px,
+          transparent 1px,
+          transparent 10px
+        )`,
       },
       keyframes: {
         'fade-in-up': {
@@ -67,12 +81,12 @@ export default {
         'elegant-fade': {
           '0%': { opacity: '0', filter: 'blur(8px)' },
           '100%': { opacity: '1', filter: 'blur(0)' }
-        }
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'border-glow': 'border-glow 3s ease-in-out infinite',
-        'shimmer': 'shimmer 8s linear infinite',
+        'shimmer': 'shimmer 3s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
         'reveal': 'reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1)',
         'elegant-fade': 'elegant-fade 1.5s cubic-bezier(0.4, 0, 0.2, 1)'
